@@ -198,19 +198,7 @@ java -cp ".:out:lib/mysql-connector-j-9.6.0.jar" com.smartclassroom.Main
 | OOP layers | Controller → Service → DAO → Model — clean separation |
 | DB connection | Singleton pattern in `DBConnection` — one connection reused throughout |
 
-    Smart Classroom Overview
-
-    <img width="1129" height="1600" alt="image" src="https://github.com/user-attachments/assets/8929ac0d-00df-4431-8f70-4ca2b6279f86" />
-
-    System UI Preview
-
-    <img width="1440" height="672" alt="image" src="https://github.com/user-attachments/assets/1a647eab-1886-4d0e-af50-e03650de755c" />
-    <img width="1440" height="644" alt="image" src="https://github.com/user-attachments/assets/96111bba-6539-42f5-8844-e589c120031d" />
-    <img width="1440" height="696" alt="image" src="https://github.com/user-attachments/assets/5d712ea3-95e1-4bb1-9903-77801847793b" />
-    <img width="1440" height="686" alt="image" src="https://github.com/user-attachments/assets/b8989ad7-ca9f-461f-953b-13cbcc5b3452" />
-    <img width="1440" height="676" alt="image" src="https://github.com/user-attachments/assets/45289264-7c4b-45d3-b219-6413eafd1a88" />
-    <img width="1440" height="718" alt="image" src="https://github.com/user-attachments/assets/4b00b8c2-c6c9-43ed-a9d6-2a4695f692ca" />
-    <img width="1440" height="740" alt="image" src="https://github.com/user-attachments/assets/1d981551-1596-4955-ae81-e0168159b1d7" />
+    [image1]
 
 
 
