@@ -1,0 +1,20 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "ssh": "Disabled",
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "Local instance 3306",
+            "database": "smrtclass",
+            "username": "root",
+            "password": "Pranu1975"
+        }
+    ],
+    "kiroAgent.configureMCP": "Disabled"
+}
