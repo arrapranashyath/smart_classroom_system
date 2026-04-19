@@ -198,13 +198,16 @@ java -cp ".:out:lib/mysql-connector-j-9.6.0.jar" com.smartclassroom.Main
 | OOP layers | Controller → Service → DAO → Model — clean separation |
 | DB connection | Singleton pattern in `DBConnection` — one connection reused throughout |
 
-    # Smart Classroom Management System
+    ## Smart Classroom Overview
 
-A Java-based application designed to streamline classroom operations, including attendance management, course handling, and user interaction for administrators, faculty, and students.
----
-## Smart Classroom Overview
-![Dashboard](assets/dashboard.png)
+![Flowchart](assets/flowchart.jpeg)
 ---
 ## System UI Preview
-![Login](assets/login.png)
-![Admin Panel](assets/admin.png)
+
+![Step 1](assets/step1.jpeg)
+![Step 2](assets/step2.jpeg)
+![Step 3](assets/step3.jpeg)
+![Step 4](assets/step4.jpeg)
+![Step 5](assets/step5.jpeg)
+![Step 6](assets/step6.jpeg)
+![Step 7](assets/step7.jpeg)
