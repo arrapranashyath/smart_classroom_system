@@ -52,7 +52,7 @@ smart_classroom/
 │       └── ConsoleView.java               ← Borders, tags, attendance bar
 ├── database/
 │   ├── schema.sql                         ← All 14 tables + FKs
-│   └── sample_data.sql                    ← 13 users, courses, attendance etc.
+│   └── sample_data.sql                    ← 53 users, 6 courses, timetable (G1), attendance etc.
 ├── lib/
 │   └── mysql-connector-j-9.6.0.jar        ← JDBC driver (already included)
 ├── out/                                   ← Compiled .class files go here
@@ -110,21 +110,28 @@ java -cp ".:out:lib/mysql-connector-j-9.6.0.jar" com.smartclassroom.Main
 
 ## Login Credentials (all passwords: `pass123`)
 
-| Role       | Username      | Full Name          |
-|------------|---------------|--------------------|
-| Admin      | admin         | Dr. Admin Singh    |
-| Lecturer   | prof_sharma   | Prof. Ravi Sharma  |
-| Lecturer   | prof_nair     | Prof. Priya Nair   |
-| Lecturer   | prof_verma    | Prof. Anil Verma   |
-| CR         | cr_ravi       | Ravi Patil         |
-| CR         | cr_sneha      | Sneha Joshi        |
-| Student    | student1      | Anjali Mehta       |
-| Student    | student2      | Rohan Desai        |
-| Student    | student3      | Pooja Kulkarni     |
-| Student    | student4      | Arjun Reddy        |
-| Student    | student5      | Meera Iyer         |
-| Technician | tech_suresh   | Suresh Kumar       |
-| Technician | tech_ramesh   | Ramesh Pillai      |
+| Role       | Username        | Full Name                  |
+|------------|-----------------|----------------------------|
+| Admin      | admin           | Admin                      |
+| Lecturer   | prof_salve      | Prof. Srikanth Salve       |
+| Lecturer   | prof_nair       | Prof. Priya Nair           |
+| Lecturer   | prof_verma      | Prof. Anil Verma           |
+| Lecturer   | prof_desai      | Prof. Rohan Desai          |
+| Lecturer   | prof_iyer       | Prof. Kavitha Iyer         |
+| Lecturer   | prof_kulkarni   | Prof. Meera Kulkarni       |
+| Lecturer   | prof_chaki      | Prof. Sanga Chaki          |
+| CR         | cr_ravi         | Ravi Patil                 |
+| CR         | cr_sneha        | Sneha Joshi                |
+| Student    | 112415001       | A Sanjhanaa                |
+| Student    | 112415002       | Aadit Bajaj                |
+| Student    | 112415003       | Aaonush Surana             |
+| Student    | 112415004       | Aarohi Anup Junghare       |
+| Student    | 112415005       | Abhay Anand Gugale         |
+| Technician | tech_suresh     | Suresh Kumar               |
+| Technician | tech_ramesh     | Ramesh Pillai              |
+
+> Student passwords follow the pattern: `lowercase-first-name@last-3-digits`
+> Example — username `112415001`, password `a@001`
 
 ---
 
