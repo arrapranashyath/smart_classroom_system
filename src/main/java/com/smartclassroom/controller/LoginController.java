@@ -54,33 +54,37 @@ public class LoginController {
         else
             ConsoleView.info("No new notifications.");
 
-        // ── 2. Today's classes ─────────────────────────────────
-        ConsoleView.printSection("Today's Classes");
-        List<Timetable> todaySlots = "LECTURER".equals(user.getRole())
-                ? timetableService.getTodaySlotsForLecturer(user.getUserId())
-                : timetableService.getTodaySlots();
-        if (todaySlots.isEmpty()) {
-            ConsoleView.info("No classes scheduled today.");
-        } else {
-            System.out.printf("  %-4s | %-4s | %-10s | %-35s | %s-%s%n",
-                    "ID","Day","Room","Course","Start","End");
-            ConsoleView.printLine();
-            for (Timetable t : todaySlots) {
-                System.out.printf("  %-4d | %-4s | %-10s | %-35s | %s-%s%n",
-                        t.getSlotId(), t.getDayOfWeek(),
-                        t.getRoomName() != null ? t.getRoomName() : "Room#" + t.getRoomId(),
-                        (t.getCourseCode() != null ? t.getCourseCode() + " " : "") +
-                        (t.getCourseName() != null ? t.getCourseName() : ""),
-                        t.getStartTime() != null ? t.getStartTime().substring(0,5) : "?",
-                        t.getEndTime()   != null ? t.getEndTime().substring(0,5)   : "?");
+        // ── 2. Today's classes (not shown for ADMIN) ──────────
+        if (!"ADMIN".equals(user.getRole())) {
+            ConsoleView.printSection("Today's Classes");
+            List<Timetable> todaySlots = "LECTURER".equals(user.getRole())
+                    ? timetableService.getTodaySlotsForLecturer(user.getUserId())
+                    : timetableService.getTodaySlots();
+            if (todaySlots.isEmpty()) {
+                ConsoleView.info("No classes scheduled today.");
+            } else {
+                System.out.printf("  %-4s | %-4s | %-10s | %-35s | %s-%s%n",
+                        "ID","Day","Room","Course","Start","End");
+                ConsoleView.printLine();
+                for (Timetable t : todaySlots) {
+                    System.out.printf("  %-4d | %-4s | %-10s | %-35s | %s-%s%n",
+                            t.getSlotId(), t.getDayOfWeek(),
+                            t.getRoomName() != null ? t.getRoomName() : "Room#" + t.getRoomId(),
+                            (t.getCourseCode() != null ? t.getCourseCode() + " " : "") +
+                            (t.getCourseName() != null ? t.getCourseName() : ""),
+                            t.getStartTime() != null ? t.getStartTime().substring(0,5) : "?",
+                            t.getEndTime()   != null ? t.getEndTime().substring(0,5)   : "?");
+                }
             }
         }
 
-        // ── 3. Next class reminder ─────────────────────────────
-        if ("LECTURER".equals(user.getRole())) {
-            timetableService.showNextClassReminderForLecturer(user.getUserId());
-        } else {
-            timetableService.showNextClassReminder();
+        // ── 3. Next class reminder (not shown for ADMIN) ──────
+        if (!"ADMIN".equals(user.getRole())) {
+            if ("LECTURER".equals(user.getRole())) {
+                timetableService.showNextClassReminderForLecturer(user.getUserId());
+            } else {
+                timetableService.showNextClassReminder();
+            }
         }
 
         // ── 4. Upcoming quizzes (students & CR only) ──────────
