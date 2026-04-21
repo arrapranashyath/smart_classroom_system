@@ -35,6 +35,11 @@ public class TimetableService {
         return dao.findByDay(getTodayAbbr());
     }
 
+    // ── Return today's slots for a specific lecturer (for dashboard) ──
+    public List<Timetable> getTodaySlotsForLecturer(int lecturerId) {
+        return dao.findByDayAndLecturer(getTodayAbbr(), lecturerId);
+    }
+
     // ── Print by lecturer ──────────────────────────────────────
     public void printByLecturer(int lecturerId) {
         ConsoleView.printSection("My Timetable");
@@ -76,9 +81,15 @@ public class TimetableService {
 
     // ── Next class reminder ────────────────────────────────────
     public void showNextClassReminder() {
-        String today   = getTodayAbbr();
+        showNextClassReminderForSlots(dao.findByDay(getTodayAbbr()));
+    }
+
+    public void showNextClassReminderForLecturer(int lecturerId) {
+        showNextClassReminderForSlots(dao.findByDayAndLecturer(getTodayAbbr(), lecturerId));
+    }
+
+    private void showNextClassReminderForSlots(List<Timetable> slots) {
         String nowTime = LocalTime.now().toString().substring(0, 5);
-        List<Timetable> slots = dao.findByDay(today);
 
         Timetable next = null;
         int minDiff    = Integer.MAX_VALUE;

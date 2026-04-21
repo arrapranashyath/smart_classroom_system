@@ -36,6 +36,17 @@ public class CourseDAO {
         return list;
     }
 
+    // ── Get one course by ID ───────────────────────────────────
+    public Course findById(int courseId) {
+        String sql = SELECT_BASE + "WHERE c.course_id=?";
+        try (PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql)) {
+            ps.setInt(1, courseId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) return mapRow(rs);
+        } catch (SQLException e) { ConsoleView.error(e.getMessage()); }
+        return null;
+    }
+
     // ── Get courses a student is enrolled in ───────────────────
     public List<Course> findByStudent(int studentId) {
         String sql = SELECT_BASE +

@@ -56,7 +56,9 @@ public class LoginController {
 
         // ── 2. Today's classes ─────────────────────────────────
         ConsoleView.printSection("Today's Classes");
-        List<Timetable> todaySlots = timetableService.getTodaySlots();
+        List<Timetable> todaySlots = "LECTURER".equals(user.getRole())
+                ? timetableService.getTodaySlotsForLecturer(user.getUserId())
+                : timetableService.getTodaySlots();
         if (todaySlots.isEmpty()) {
             ConsoleView.info("No classes scheduled today.");
         } else {
@@ -75,14 +77,18 @@ public class LoginController {
         }
 
         // ── 3. Next class reminder ─────────────────────────────
-        timetableService.showNextClassReminder();
+        if ("LECTURER".equals(user.getRole())) {
+            timetableService.showNextClassReminderForLecturer(user.getUserId());
+        } else {
+            timetableService.showNextClassReminder();
+        }
 
         // ── 4. Upcoming quizzes (students & CR only) ──────────
         if ("STUDENT".equals(user.getRole()) || "CR".equals(user.getRole())) {
-            ConsoleView.printSection("Upcoming Quizzes (Pending)");
+            ConsoleView.printSection("Upcoming Quizzes");
             List<Quiz> quizzes = quizService.getUpcomingForStudent(user.getUserId());
             if (quizzes.isEmpty()) {
-                ConsoleView.info("No pending quizzes.");
+                ConsoleView.info("No upcoming quizzes.");
             } else {
                 for (Quiz q : quizzes)
                     System.out.println("  " + q);

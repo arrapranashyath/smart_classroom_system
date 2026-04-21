@@ -44,6 +44,18 @@ public class TimetableDAO {
         return list;
     }
 
+    public List<Timetable> findByDayAndLecturer(String day, int lecturerId) {
+        String sql = SELECT_BASE + "WHERE t.day_of_week=? AND c.lecturer_id=? ORDER BY t.start_time";
+        List<Timetable> list = new ArrayList<>();
+        try (PreparedStatement ps = DBConnection.getConnection().prepareStatement(sql)) {
+            ps.setString(1, day);
+            ps.setInt(2, lecturerId);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) list.add(mapRow(rs));
+        } catch (SQLException e) { ConsoleView.error(e.getMessage()); }
+        return list;
+    }
+
     public List<Timetable> searchByCourseName(String keyword) {
         String sql = SELECT_BASE + "WHERE c.course_name LIKE ? OR c.course_code LIKE ?";
         List<Timetable> list = new ArrayList<>();

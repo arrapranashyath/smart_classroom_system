@@ -133,9 +133,9 @@ public class QuizService {
     }
 
     public void printUpcomingForStudent(int studentId) {
-        ConsoleView.printSection("Upcoming Quizzes (Not Yet Attempted)");
+        ConsoleView.printSection("Upcoming Quizzes");
         List<Quiz> list = quizDAO.findUpcomingForStudent(studentId);
-        if (list.isEmpty()) { ConsoleView.info("No pending quizzes."); return; }
+        if (list.isEmpty()) { ConsoleView.info("No upcoming quizzes."); return; }
         for (Quiz q : list) System.out.println("  " + q);
     }
 }

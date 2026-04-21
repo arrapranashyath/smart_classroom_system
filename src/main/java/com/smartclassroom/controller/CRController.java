@@ -1,9 +1,11 @@
 package com.smartclassroom.controller;
 
 import com.smartclassroom.dao.AnnouncementDAO;
+import com.smartclassroom.dao.CourseDAO;
 import com.smartclassroom.dao.FeedbackDAO;
 import com.smartclassroom.dao.IssueDAO;
 import com.smartclassroom.dao.NotificationDAO;
+import com.smartclassroom.model.Course;
 import com.smartclassroom.model.User;
 import com.smartclassroom.service.*;
 import com.smartclassroom.util.InputHelper;
@@ -24,6 +26,7 @@ public class CRController {
     private final AnnouncementDAO   announcementDAO   = new AnnouncementDAO();
     private final NotificationDAO   notifDAO          = new NotificationDAO();
     private final FeedbackDAO       feedbackDAO       = new FeedbackDAO();
+    private final CourseDAO         courseDAO         = new CourseDAO();
     private final IssueDAO          issueDAO          = new IssueDAO();
 
     public CRController(User user) { this.user = user; }
@@ -163,8 +166,20 @@ public class CRController {
         int rating   = InputHelper.getIntInRange("Rating (1-5 stars)", 1, 5);
         String comments = InputHelper.getOptionalString("Comments");
         if (feedbackDAO.insert(courseId, rating, comments.isEmpty() ? null : comments)) {
+            notifyLecturerAboutFeedback(courseId, rating);
             ConsoleView.success("Feedback submitted anonymously.");
         }
+    }
+
+    private void notifyLecturerAboutFeedback(int courseId, int rating) {
+        Course course = courseDAO.findById(courseId);
+        if (course == null || course.getLecturerId() <= 0) return;
+
+        String title = "New Anonymous Feedback";
+        String message = "New anonymous feedback received for " +
+                (course.getCourseName() != null ? course.getCourseName() : "course #" + courseId) +
+                ". Rating: " + rating + "/5.";
+        notifDAO.send(course.getLecturerId(), title, message);
     }
 
     private void viewNotificationsFlow() {
